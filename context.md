@@ -38,3 +38,102 @@ La página de detalle de habitación utiliza un useEffect para cargar los datos 
 ```text
 Como usuario, quiero poder buscar apartamentos introduciendo información de los mismos en una barra de búsqueda, quiero poder ordenar los resultados según el precio (asc/desc) y poder ver la ubicación de los apartamentos en un mapa. Además, quiero que al seleccionar un apartamento pueda ver toda su información detallada incluyendo servicios disponibles, costo por noche/huéspedes, imágenes del apartamento e información del anfitrión de la casa.
 ```
+
+# Descripción de los componentes en /components (AI Generated)
+
+## components/layout
+
+### TopNav
+
+Este componente renderiza la barra de navegación superior compartida por toda la aplicación. Incluye el logo con enlace al inicio, el campo de búsqueda controlado por props, un enlace directo al catálogo y dos botones visuales para idioma y menú de usuario.
+
+- Se importa en `app/page.tsx`.
+- Se utiliza en la vista Home para capturar el texto de búsqueda y filtrar alojamientos en tiempo real.
+- Se importa en `app/catalog/page.tsx`.
+- Se utiliza en la vista Catálogo para buscar por nombre o ciudad dentro del listado.
+- Se importa en `app/rooms/[id]/page.tsx`.
+- Se utiliza en la vista de detalle de habitación como cabecera global de navegación y búsqueda.
+
+## components/home
+
+### CategoryRow
+
+Este componente muestra una fila horizontal de categorías seleccionables. Recibe la lista de categorías, resalta la categoría activa y dispara `onSelect` cuando el usuario pulsa una opción para filtrar los alojamientos.
+
+- Se importa en `app/page.tsx`.
+- Se utiliza únicamente en la vista Home para filtrar los alojamientos por categoría.
+
+## components/shared
+
+### AccommodationCard
+
+Este componente representa la tarjeta visual de un alojamiento. Muestra una portada placeholder, título, ubicación, precio por noche, valoración y un enlace hacia la vista de detalle de la habitación correspondiente.
+
+- Se importa en `app/page.tsx`.
+- Se utiliza en la vista Home para renderizar cada alojamiento filtrado.
+- Se importa en `app/catalog/page.tsx`.
+- Se utiliza en la vista Catálogo para renderizar cada resultado ordenado por precio.
+
+### AccommodationCardSkeleton
+
+Este componente renderiza un placeholder con animación de carga que simula la estructura de una tarjeta de alojamiento mientras los datos aún no están disponibles.
+
+- Se importa en `app/page.tsx`.
+- Se utiliza únicamente en la vista Home mientras el estado `loading` sigue activo.
+
+## components/catalog
+
+### CatalogHeader
+
+Este componente muestra la cabecera funcional del catálogo. Enseña el total de resultados disponibles y un selector para cambiar el orden ascendente o descendente según el precio.
+
+- Se importa en `app/catalog/page.tsx`.
+- Se utiliza únicamente en la vista Catálogo para mostrar el conteo de resultados y controlar el ordenamiento.
+
+### MapPlaceholder
+
+Este componente renderiza un bloque lateral que actúa como placeholder del mapa. Incluye un título, una breve descripción y un área visual reservada para la futura vista geográfica de alojamientos.
+
+- Se importa en `app/catalog/page.tsx`.
+- Se utiliza únicamente en la vista Catálogo, a la derecha del grid en escritorio y debajo del listado en móviles.
+
+## components/room
+
+### PhotoGallery
+
+Este componente implementa la galería de fotos de la habitación. Mantiene con `useState` el índice de la foto activa y permite navegar entre imágenes con los botones Anterior y Siguiente.
+
+- Se importa en `app/rooms/[id]/page.tsx`.
+- Se utiliza únicamente en la vista de detalle de habitación para mostrar el carrusel superior de fotos.
+
+### RoomHeader
+
+Este componente muestra la información principal de la habitación: nombre, valoración, número de reseñas, ciudad, país y coordenadas geográficas.
+
+- Se importa en `app/rooms/[id]/page.tsx`.
+- Se utiliza únicamente en la vista de detalle de habitación como cabecera informativa del alojamiento.
+
+### HostInfo
+
+Este componente renderiza el bloque de información del anfitrión. Presenta un avatar placeholder, el nombre del anfitrión y los años que lleva hospedando.
+
+- Se importa en `app/rooms/[id]/page.tsx`.
+- Se utiliza únicamente en la vista de detalle de habitación para mostrar los datos del anfitrión.
+
+### AmenitiesGrid
+
+Este componente muestra la lista de servicios de la habitación en formato de cuadrícula. Cada servicio aparece como un ítem con un icono de verificación y su etiqueta.
+
+- Se importa en `app/rooms/[id]/page.tsx`.
+- Se utiliza únicamente en la vista de detalle de habitación para listar los servicios disponibles.
+
+### ReservationCard
+
+Este componente renderiza la tarjeta de reserva lateral. Muestra el precio por noche, un contador de huéspedes con mínimo y máximo controlados por estado local, y el botón principal de reserva.
+
+- Se importa en `app/rooms/[id]/page.tsx`.
+- Se utiliza únicamente en la vista de detalle de habitación como CTA de reserva junto a la información principal del alojamiento.
+
+## Nota
+
+El archivo `components/shared/mockData.ts` también está dentro de `/components`, pero no es un componente visual. Su función es servir datos simulados (`ACCOMMODATIONS` y `CATEGORIES`) para las vistas Home, Catálogo y Detalle de habitación.
